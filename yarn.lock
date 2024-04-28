@@ -8270,6 +8270,7 @@ __metadata:
     "@expo/vector-icons": "npm:^14.0.0"
     "@react-navigation/native": "npm:^6.0.2"
     "@types/react": "npm:~18.2.45"
+    execa: "npm:^5.1.1"
     expo: "npm:~50.0.14"
     expo-constants: "npm:~15.4.6"
     expo-dev-client: "npm:~3.3.11"
