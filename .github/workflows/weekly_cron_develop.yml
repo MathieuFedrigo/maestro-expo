@@ -48,3 +48,10 @@ jobs:
       with:
         command: eas update --auto
         comment: false
+
+    - name: E2E tests with Maestro
+      run: |
+        curl -Ls "https://get.maestro.mobile.dev" | bash
+        export PATH="$PATH":"$HOME/.maestro/bin"
+        yarn test:e2e:ci:ios --ios-update-id ${{ steps.preview.outputs.iosId }} --apiKey ${{ secrets.MAESTRO_API_KEY }} --tags pr,weekly
+        yarn test:e2e:ci:android --android-update-id ${{ steps.preview.outputs.androidId }} --apiKey ${{ secrets.MAESTRO_API_KEY }} --tags pr,weekly
