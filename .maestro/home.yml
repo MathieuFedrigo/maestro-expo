@@ -1,0 +1,8 @@
+appId: com.mathieuf.maestroexpo
+tags:
+  - pr
+  - weekly
+  - deploy
+---
+- runFlow: helper/openApp.yml
+- assertVisible: "Hello Mathieu"
