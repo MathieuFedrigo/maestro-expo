@@ -1,0 +1,54 @@
+appId: com.mathieuf.maestroexpo
+env:
+  EXPO_UPDATE_URL_BASE: https://u.expo.dev/update/
+  IOS_LOCALHOST_URL: http://localhost:8081/?platform=ios&dev=true&minify=false&disableOnboarding=1
+  ANDROID_LOCALHOST_URL: http://10.0.2.2:8081/?platform=android&dev=true&minify=false&disableOnboarding=1
+  EXPO_DEV_CLIENT_LINK_BASE: exp+maestro-expo://expo-development-client/?url=
+---
+- runFlow: # IOS localhost
+    when:
+      platform: iOS
+    commands:
+      - runScript:
+          file: encodeURL.js
+          env:
+            URL: ${IOS_LOCALHOST_URL}
+- runFlow: # IOS update
+    when:
+      platform: iOS
+      true: ${IOS_UPDATE_ID}
+    commands:
+      - runScript:
+          file: encodeURL.js
+          env:
+            URL: ${EXPO_UPDATE_URL_BASE + IOS_UPDATE_ID + '/?disableOnboarding=1'}
+
+- runFlow: # Android localhost
+    when:
+      platform: Android
+    commands:
+      - runScript:
+          file: encodeURL.js
+          env:
+            URL: ${ANDROID_LOCALHOST_URL}
+- runFlow: # Android update
+    when:
+      platform: Android
+      true: ${ANDROID_UPDATE_ID}
+    commands:
+      - runScript:
+          file: encodeURL.js
+          env:
+            URL: ${EXPO_UPDATE_URL_BASE + ANDROID_UPDATE_ID + '/?disableOnboarding=1'}
+
+- openLink: ${EXPO_DEV_CLIENT_LINK_BASE + output.openApp.encodedURL}
+- runFlow:
+    when:
+      platform: iOS
+      true: ${IOS_UPDATE_ID}
+    commands:
+      - runFlow:
+          when:
+            visible: Open
+          commands:
+            - tapOn: Open
