@@ -37,6 +37,16 @@ const cli = meow(
     --tags                    A comma-separated list of maestro tags. This will run all flows containing the provided tags;
                               it doesn't matter if those Flows also have other tags.
                                 > Example: tag1,tag2
+    --branch                  The name of the git branch the app was built on and the pull request is based on.
+                                > Example: feature-foo
+    --repoOwner               The owner of the repository.
+                                > Example: MathieuFedrigo
+    --repoName                The name of the repository.
+                                > Example: maestro-expo
+    --pullRequestId           The unique identifier of the pull request.
+                                > Example: 1234
+    --commitSha               The commit hash.
+                                > Example: 586e1c690891d20568976c78f06fbec9b94a3b32
 
   Examples
     $ yarn sucrase-node scripts/downloadAndSendToMaestro.ts --platform ios --appIdentifier com.mathieuf.maestroexpo --buildProfile development-simulator
@@ -80,7 +90,27 @@ const cli = meow(
       tags: {
         type: "string",
         isRequired: false,
-      }
+      },
+      branch: {
+        type: "string",
+        isRequired: false,
+      },
+      repoOwner: {
+        type: "string",
+        isRequired: false,
+      },
+      repoName: {
+        type: "string",
+        isRequired: false,
+      },
+      pullRequestId: {
+        type: "string",
+        isRequired: false,
+      },
+      commitSha: {
+        type: "string",
+        isRequired: false,
+      },
     },
   }
 );
@@ -95,6 +125,11 @@ const {
   apiKey,
   async,
   tags,
+  branch,
+  repoOwner,
+  repoName,
+  pullRequestId,
+  commitSha,
 } = cli.flags;
 
 if (platform !== "ios" && platform !== "android")
@@ -121,6 +156,11 @@ const downloadAndSendToMaestro = async () => {
     androidUpdateId,
     async,
     tags,
+    branch,
+    repoOwner,
+    repoName,
+    pullRequestId,
+    commitSha,
   });
 };
 

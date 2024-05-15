@@ -8,6 +8,11 @@ export const sendToMaestroCloud = async ({
   androidUpdateId,
   async,
   tags,
+  branch,
+  repoOwner,
+  repoName,
+  pullRequestId,
+  commitSha,
 }: {
   appPath: string;
   maestroTestsDirectory: string;
@@ -16,6 +21,11 @@ export const sendToMaestroCloud = async ({
   androidUpdateId?: string;
   async?: boolean;
   tags?: string;
+  branch?: string;
+  repoOwner?: string;
+  repoName?: string;
+  pullRequestId?: string;
+  commitSha?: string;
 }) => {
   console.log("Running Maestro Cloud command with", {
     appPath,
@@ -25,11 +35,21 @@ export const sendToMaestroCloud = async ({
     androidUpdateId,
     async,
     tags,
+    branch,
+    repoOwner,
+    repoName,
+    pullRequestId,
+    commitSha,
   });
   const args = ["cloud"];
   if (async) args.push("--async");
   if (apiKey) args.push("--apiKey", apiKey);
   if (tags) args.push(`--include-tags=${tags}`);
+  if (branch) args.push("--branch", branch);
+  if (repoOwner) args.push("--repoOwner", repoOwner);
+  if (repoName) args.push("--repoName", repoName);
+  if (pullRequestId) args.push("--pullRequestId", pullRequestId);
+  if (commitSha) args.push("--commitSha", commitSha);
   if (iosUpdateId) args.push("-e", `IOS_UPDATE_ID=${iosUpdateId}`);
   if (androidUpdateId) args.push("-e", `ANDROID_UPDATE_ID=${androidUpdateId}`);
   args.push("--app-file", appPath);
