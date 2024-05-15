@@ -13,6 +13,7 @@ export const sendToMaestroCloud = async ({
   repoName,
   pullRequestId,
   commitSha,
+  name,
 }: {
   appPath: string;
   maestroTestsDirectory: string;
@@ -26,6 +27,7 @@ export const sendToMaestroCloud = async ({
   repoName?: string;
   pullRequestId?: string;
   commitSha?: string;
+  name?: string;
 }) => {
   console.log("Running Maestro Cloud command with", {
     appPath,
@@ -40,6 +42,7 @@ export const sendToMaestroCloud = async ({
     repoName,
     pullRequestId,
     commitSha,
+    name,
   });
   const args = ["cloud"];
   if (async) args.push("--async");
@@ -50,6 +53,7 @@ export const sendToMaestroCloud = async ({
   if (repoName) args.push("--repoName", repoName);
   if (pullRequestId) args.push("--pullRequestId", pullRequestId);
   if (commitSha) args.push("--commitSha", commitSha);
+  if (name) args.push("--name", name);
   if (iosUpdateId) args.push("-e", `IOS_UPDATE_ID=${iosUpdateId}`);
   if (androidUpdateId) args.push("-e", `ANDROID_UPDATE_ID=${androidUpdateId}`);
   args.push("--app-file", appPath);

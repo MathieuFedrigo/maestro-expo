@@ -47,6 +47,8 @@ const cli = meow(
                                 > Example: 1234
     --commitSha               The commit hash.
                                 > Example: 586e1c690891d20568976c78f06fbec9b94a3b32
+    --name                   The name of the maestro cloud upload.
+                                > Example: my-upload
 
   Examples
     $ yarn sucrase-node scripts/downloadAndSendToMaestro.ts --platform ios --appIdentifier com.mathieuf.maestroexpo --buildProfile development-simulator
@@ -111,6 +113,10 @@ const cli = meow(
         type: "string",
         isRequired: false,
       },
+      name: {
+        type: "string",
+        isRequired: false,
+      },
     },
   }
 );
@@ -130,6 +136,7 @@ const {
   repoName,
   pullRequestId,
   commitSha,
+  name,
 } = cli.flags;
 
 if (platform !== "ios" && platform !== "android")
@@ -161,6 +168,7 @@ const downloadAndSendToMaestro = async () => {
     repoName,
     pullRequestId,
     commitSha,
+    name,
   });
 };
 
