@@ -51,5 +51,5 @@ jobs:
       run: |
         curl -Ls "https://get.maestro.mobile.dev" | bash
         export PATH="$PATH":"$HOME/.maestro/bin"
-        yarn test:e2e:ci:ios --ios-update-id ${{ steps.preview.outputs.iosId }} --apiKey ${{ secrets.MAESTRO_API_KEY }} --tags pr
-        yarn test:e2e:ci:android --android-update-id ${{ steps.preview.outputs.androidId }} --apiKey ${{ secrets.MAESTRO_API_KEY }} --tags pr
+        yarn test:e2e:ci:ios --ios-update-id ${{ steps.preview.outputs.iosId }} --apiKey ${{ secrets.MAESTRO_API_KEY }} --tags pr --branch ${{ github.ref_name }} --pullRequestId ${{ github.event.pull_request.number }} --commitSha ${{ github.sha }}
+        yarn test:e2e:ci:android --android-update-id ${{ steps.preview.outputs.androidId }} --apiKey ${{ secrets.MAESTRO_API_KEY }} --tags pr --branch ${{ github.ref_name }} --pullRequestId ${{ github.event.pull_request.number }} --commitSha ${{ github.sha }}
