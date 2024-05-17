@@ -1,12 +1,13 @@
 appId: com.mathieuf.maestroexpo
 tags:
-  - deploy
+  - pr
 ---
 - runFlow: helper/openApp.yml
 - tapOn:
     id: "modal-info"
 - assertVisible: "A cool modal"
 - swipe:
-   from: 'Info'
-   direction: DOWN
+    from:
+      id: "Info"
+    direction: "DOWN"
 - assertNotVisible: "A cool modal"
