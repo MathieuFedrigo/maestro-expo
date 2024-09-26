@@ -5,7 +5,7 @@ This is an example repo for testing an Expo app with Maestro (with full CI integ
 With this setup, the app isn't rebuilt on each run. We only publish an expo update and useMaestro Cloud which makes for super fast E2E test runs (<5min).
 
 For more info, see:
-- [Slides of the talk at React Native Heroes](https://docs.google.com/presentation/d/1CaT6HvsXMtfMhTUK46jE-gdDXZboQ-arKJuMZ6Nc51g)
+- [Slides of the talk](https://docs.google.com/presentation/d/1CaT6HvsXMtfMhTUK46jE-gdDXZboQ-arKJuMZ6Nc51g)
 - Video of the talk (coming soon)
 - Article (coming soon)
 
